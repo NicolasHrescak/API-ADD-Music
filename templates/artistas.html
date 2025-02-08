@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Lista de Artistas</h1>
+{% if lista_artistas %}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Gênero</th>
+        <th scope="col">Gravadora</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+        
+    <tbody>
+    {% for artista in lista_artistas %}
+      <tr>
+        <td>{{ artista.id_artista }}</td>
+        <td>{{ artista.nome }}</td>
+        <td>{{ artista.genero }}</td>
+        <td>{{ artista.gravadora }}</td>
+        <td><a href="{{ url_for('update_artista', artista_id=artista.id_artista) }}"><button class="right-align btn btn-info">Editar</button></a></td>
+        <td><a href="{{ url_for('delete_artista', artista_id=artista.id_artista) }}"><button class="right-align btn btn-danger">Deletar</button></a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+        <p>Nenhum(a) artista adicionado(a) ao banco de dados.</p>
+{% endif %}
+  <a href="{{url_for('add_artista')}}"><button type="button" class="btn btn-primary">Adicionar Artista</button></a>
+{% endblock %}

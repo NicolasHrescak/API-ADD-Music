@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Lista de Álbuns</h1>
+{% if lista_albuns %}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Artista</th>
+        <th scope="col">Data de Lançamento</th>
+        <th scope="col">Gravadora</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+        
+    <tbody>
+    {% for album in lista_albuns %}
+      <tr>
+        <td>{{ album.id_album }}</td>
+        <td>{{ album.titulo }}</td>
+        <td>{{ album.artista.nome }}</td>
+        <td>{{ album.date }}</td>
+        <td>{{ album.gravadora }}</td>
+        <td><a href="{{ url_for('update_album', album_id=album.id_album) }}"><button class="right-align btn btn-info">Editar</button></a></td>
+        <td><a href="{{ url_for('delete_album', album_id=album.id_album) }}"><button class="right-align btn btn-danger">Deletar</button></a></td>
+        <td><a href="{{ url_for('add_album', album_id=album.id_album) }}"><button class="right-align btn btn-success">Adicionar Faixas</button></a></td>
+      </tr>
+    </tbody>
+</table>
+    {% endfor %}
+    {% else %}
+        <p>Nenhum álbum adicionado ao banco de dados.</p>
+    {% endif %}
+  <a href="{{url_for('add_album')}}"><button type="button" class="btn btn-primary">Adicionar Álbum</button></a>
+{% endblock %}
+

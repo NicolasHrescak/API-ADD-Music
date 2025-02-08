@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Atualizando artista: {{artista.nome}} </h1>
+    <form method="POST" action="/update_artista/{{artista.id_artista}}">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+            <label for="genero">Gênero</label>
+            <input type="text" class="form-control" id="genero" name="genero" required>
+        </div>
+        <div class="form-group">
+            <label for="gravadora">Gravadora</label>
+            <input type="text" class="form-control" id="gravadora" name="gravadora" required>
+        </div>
+    </br>
+        <button type="submit" class="btn btn-primary btn-block">Atualizar</button>
+    </form>
+    <p class="mt-4 text-center">
+        Preencha o formulário acima para atualizar o(a) artista {{artista.nome}}.
+    </p>
+</div>
+{% endblock %}

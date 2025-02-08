@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Cadastro de Música</h1>
+    <form method="POST" action="/add_musica">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="duracao">Duração (em minutos)</label>
+            <input type="text" class="form-control" id="duracao" name="duracao" required>
+        </div>
+        <div class="form-group">
+            <label for="compositor">Artista</label>
+            <input type="text" class="form-control" id="artista" name="artista" required>
+        </div>
+        <div class="form-group">
+            <label for="album">Álbum</label>
+            <input type="text" class="form-control" id="album" name="album" required>
+        </div>
+    </br>
+        <button type="submit" class="btn btn-warning btn-block">Cadastrar</button>
+    </form>
+    <p class="mt-4 text-center">
+        Preencha o formulário acima para cadastrar uma nova música.
+    </p>
+</div>
+{% endblock %}

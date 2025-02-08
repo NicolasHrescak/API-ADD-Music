@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos adicionais para centralizar e estilizar o formulário */
+        .register-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        .register-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="register-container">
+            <h2>Cadastro</h2>
+            <!-- Formulário de Cadastro -->
+            <form action="{{ url_for('register') }}" method="POST" onsubmit="return veTamanho()" >
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Escolha um nome de usuário" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Escolha uma senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"  >Cadastrar</button>
+            </form>
+            <!-- Link para Login -->
+            <p class="text-center mt-3">
+                <a href="{{ url_for('login') }}">Já tem uma conta? Faça login</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript do Emscripten que utiliza a função em C -->
+    <script src="{{ url_for('static', filename='min_length.js') }}" ></script> <!--Importo a função modularizada em js -->
+    <script>
+Module().then((Module) => { <!--modulo padrão do emscriptem-->
+    function veTamanho() {
+        const input = document.getElementById("username").value;
+        const length = input.length;
+
+        const result = Module._has_minimum_length(length); <!-- Passo a função com o parametro já visto pelo js para a constante -->
+
+        if (!result) {
+            alert("O login deve ter pelo menos 4 caracteres.");
+            return false; // serve para impedir o envio do formulário!
+        }
+        return true;
+    }
+
+    window.veTamanho = veTamanho;
+});
+
+
+
+
+    </script>
+</body>
+</html>
